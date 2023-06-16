@@ -1,10 +1,10 @@
-name:                generic-crud-servant-persistent
+name:                crud-generator
 version:             0.1.0.0
-github:              "sfeitosa/generic-crud-servant-persistent"
+github:              "github.com/natani3l"
 license:             BSD3
-author:              "Samuel Feitosa"
-maintainer:          "feitosa.sams [at] gmail [dot] com"
-copyright:           "LGPL v3"
+author:              "Nataniel Siebeneichler"
+maintainer:          "nataniel.lemes@estudante.uffs.edu.br"
+copyright:           "2023 Nataniel Siebeneichler"
 
 extra-source-files:
 - README.md
@@ -17,7 +17,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/sfeitosa/generic-crud-servant-persistent#readme>
+description:         Please see the README on GitHub at <https://github.com/githubuser/crud-generator#readme>
 
 dependencies:
 - base >= 4.7 && < 5
@@ -33,6 +33,12 @@ dependencies:
 - transformers
 - wai
 - warp
+- directory
+- bytestring
+- template-haskell
+- containers
+- filepath
+- network
 
 ghc-options:
 - -Wall
@@ -49,7 +55,7 @@ library:
   source-dirs: src
 
 executables:
-  main-exe:
+  api:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -58,7 +64,7 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - base
-    - generic-crud-servant-persistent
+    - crud-generator
 
 tests:
   main-test:
@@ -70,7 +76,7 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - base
-    - generic-crud-servant-persistent
+    - crud-generator
     - hspec
     - hspec-wai
     - hspec-wai-json

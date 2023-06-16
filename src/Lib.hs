@@ -6,11 +6,13 @@ module Lib
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
-
 import Server.Routes
 
 startApp :: IO ()
-startApp = run 8080 app
+startApp = do
+    let port = 8080
+    putStrLn $ "Server running on port: " ++ show port
+    run port app
 
 app :: Application
 app = serve api server

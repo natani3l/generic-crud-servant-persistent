@@ -47,25 +47,36 @@ serverGen list new view upd del =
 -- Handler functions
 
 listHandlerGen :: (PersistEntityBackend a ~ SqlBackend, PersistEntity a) 
-               => DBInfo -> Handler [a]
+               => DBInfo 
+               -> Handler [a]
 listHandlerGen c = liftIO $ listGen c
 
 newHandlerGen :: (ToBackendKey SqlBackend a, i ~ Int64) 
-              => DBInfo -> a -> Handler i
+              => DBInfo 
+              -> a 
+              -> Handler i
 newHandlerGen c ent = liftIO $ newGen c ent
 
 viewHandlerGen :: (ToBackendKey SqlBackend a, i ~ Int64)
-               => DBInfo -> i -> Handler a 
+               => DBInfo 
+               -> i 
+               -> Handler a 
 viewHandlerGen c eid = do 
   maybeEnt <- liftIO $ viewGen c eid 
   case maybeEnt of 
     Just ent -> return ent 
-    Nothing  -> Handler (throwE $ err401 { errBody = "Could not find AuthUser with that ID" })
+    Nothing  -> Handler (throwE $ err401 { errBody = "Could not find User with that ID" })
 
 updateHandlerGen :: (ToBackendKey SqlBackend a, i ~ Int64)
-                 => DBInfo -> i -> a -> Handler ()
+                 => DBInfo 
+                 -> i 
+                 -> a 
+                 -> Handler ()
 updateHandlerGen c eid ent = liftIO $ updateGen c eid ent
 
 deleteHandlerGen :: (ToBackendKey SqlBackend a, i ~ Int64) 
-                 => DBInfo -> Proxy a -> i -> Handler ()
+                 => DBInfo 
+                 -> Proxy a 
+                 -> i 
+                 -> Handler ()
 deleteHandlerGen c p eid = liftIO $ deleteGen c p eid
